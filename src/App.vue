@@ -1,85 +1,49 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import { RouterView } from 'vue-router'
+import { useAuth0 } from '@auth0/auth0-vue'
+import { watch } from 'vue'
+import NavBar from './components/NavBar.vue'
+const { isAuthenticated, isLoading, error } = useAuth0()
+
+// VIGILANTE DE ERRORES: Esto soluciona el bloqueo de los botones
+watch(error, (newError) => {
+  if (newError) {
+    // Si el error es el que configuramos en la Action de Auth0
+    if (newError.message.includes('verifica')) {
+      alert(
+        '📧 ¡Correo no verificado! \nTe hemos enviado un enlace a tu bandeja de entrada. Por favor confírmalo para poder ingresar.',
+      )
+    } else {
+      alert('Error de autenticación: ' + newError.message)
+    }
+
+    // IMPORTANTE: Recargamos la página o redirigimos al login
+    // para limpiar el error de la URL y desbloquear los botones.
+    window.location.href = window.location.origin
+  }
+})
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <div
+    v-if="isLoading"
+    class="d-flex flex-column align-items-center justify-content-center vh-100 text-center"
+  >
+    <div class="h2 font-weight-bold mb-3">Redireccionando...</div>
+    <div class="spinner-border text-primary" role="status"></div>
+  </div>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+  <div v-else>
+    <NavBar v-if="isAuthenticated" />
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
+    <main :class="{ 'container mt-4': isAuthenticated }">
+      <RouterView />
+    </main>
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+<style>
+body {
+  background-color: #f8f9fa; /* Un gris muy claro típico de Bootstrap */
 }
 </style>

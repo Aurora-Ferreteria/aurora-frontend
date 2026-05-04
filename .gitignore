@@ -1,6 +1,4 @@
-# =========================
-# Logs y Reportes
-# =========================
+# Logs
 logs
 *.log
 npm-debug.log*
@@ -8,35 +6,17 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
-pids
-*.pid
-*.seed
-*.pid.lock
 
-# =========================
-# Dependencias (NUNCA SUBIR)
-# =========================
-node_modules/
-jspm_packages/
-web_modules/
-bower_components/
-
-# =========================
-# Entorno y Secretos (NUNCA SUBIR)
-# =========================
-.env
-.env.*
-!.env.example
+node_modules
+.DS_Store
+dist
+dist-ssr
+coverage
 *.local
 
-# =========================
-# Archivos del Sistema Operativo y del IDE
-# =========================
-.DS_Store
+# Editor directories and files
 .vscode/*
 !.vscode/extensions.json
-.vscode-test
 .idea
 *.suo
 *.ntvs*
@@ -44,74 +24,16 @@ bower_components/
 *.sln
 *.sw?
 
-# =========================
-# Salidas de Construcción (Build)
-# =========================
-dist
-dist-ssr
-build/Release
-out
-.output
-
-# =========================
-# Cachés (Optimizan tu entorno local)
-# =========================
-.cache
-.parcel-cache
 *.tsbuildinfo
-.eslintcache
-.stylelintcache
-.npm
 
-# =========================
-# Pruebas y Cobertura
-# =========================
-coverage
-*.lcov
-.nyc_output
-lib-cov
+.eslintcache
+
+# Cypress
 /cypress/videos/
 /cypress/screenshots/
+
+# Vitest
 __screenshots__/
 
-# =========================
-# Configuraciones de Vite
-# =========================
+# Vite
 *.timestamp-*-*.mjs
-vite.config.js.timestamp-*
-vite.config.ts.timestamp-*
-.vite/
-
-# =========================
-# Gestores de Paquetes (Yarn, pnpm, npm)
-# =========================
-*.tgz
-.yarn-integrity
-.pnpm-store
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
-
-# =========================
-# Otros Frameworks y Herramientas (Plantilla estándar)
-# =========================
-.grunt
-.lock-wscript
-.node_repl_history
-.next
-.nuxt
-.vuepress/dist
-.temp
-.svelte-kit/
-**/.vitepress/dist
-**/.vitepress/cache
-.docusaurus
-.serverless/
-.fusebox/
-.dynamodb/
-.firebase/
-.tern-port
