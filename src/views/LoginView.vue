@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import LoginButton from '../components/auth0/LoginButton.vue'
-import RegistroButton from '../components/auth0/RegistroButton.vue'
 </script>
 
 <template>
@@ -22,10 +21,6 @@ import RegistroButton from '../components/auth0/RegistroButton.vue'
     </div>
 
     <!-- Botones inferiores (Signup y Login pequeño) para mantener el diseño visual -->
-    <div class="bottom-actions d-flex gap-2 mt-5">
-      <RegistroButton />
-      <!-- Aquí puedes repetir el LoginButton o dejar solo el Registro según prefieras -->
-    </div>
   </div>
 </template>
 
