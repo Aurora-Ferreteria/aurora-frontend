@@ -15,10 +15,11 @@ app.use(router)
 // 2. Configuramos Auth0 (¡ESTO ES LO QUE HACE QUE LOS BOTONES FUNCIONEN!)
 app.use(
   createAuth0({
-    domain: 'aurorajk.us.auth0.com', // <--- Reemplaza esto
-    clientId: 'eSZ0yEOHkDgpI3EDbGvLepreJbGEQc9d', // <--- Reemplaza esto
+    domain: import.meta.env.VITE_AUTH0_DOMAIN, // <--- Reemplaza esto
+    clientId: import.meta.env.VITE_AUTH0_CLIENT_ID, // <--- Reemplaza esto
     authorizationParams: {
       redirect_uri: window.location.origin,
+      audience: import.meta.env.VITE_AUTH0_AUDIENCE,
     },
   }),
 )
