@@ -3,7 +3,7 @@ export type HttpResponse<Response> = {
   error?: string
 }
 
-const BASE_URL = 'http://localhost:8080'
+const BASE_URL = import.meta.env.VITE_BASE_URL || 'http://localhost:8080'
 
 // GET
 export async function getRequest<Response>(endpoint: string): Promise<HttpResponse<Response>> {
